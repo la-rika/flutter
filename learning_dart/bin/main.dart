@@ -1,6 +1,14 @@
 import 'package:flutter/flutter.dart' as flutter;
+import "dart:io"; // package per lavorare con gli input dallo user e gli output
+
+
+enum Status {
+  OPEN, // 0
+  CLOSED // 1
+}
 
 void main() {
+
   var chupagna = "chupagna"; // puo' essere assegnato solo type string
   var amount = 4; // puo' essere assegnato solo type int
   dynamic chupa = "zao"; // puo' essere assegnato qualsiasi type
@@ -16,5 +24,56 @@ void main() {
   print(chupagna.runtimeType); // le variabili sono oggetti e quindi hanno i metodi (ritorna il type di chupagna)
 
   assert("ciao" == "ciao"); // controlla se le stringhe sono uguali basandosi sul encoding UTF-16, in caso contrario da errore
+
+  // COLLECTIONS
+  // fixed list :  array con lunghezza fissa
+  // growable list : array a cui si possono aggiungere o togliere elementi
+  // sono growable a meno che non venga specificato il contrario
+  List<int> numberList = [2,56,22,77];
+  var fruitList = ["apple","orange"];
+  var fruitList2 = ["MELON", for(var fruit in fruitList) '${fruit.toUpperCase()}', "MANGO"]; // mette gli elementi di fruitList in uppercase
+  var isShoppingDone = true;
+  var shoppingCart = ["apple", if(isShoppingDone) "grape"]; // aggiunge elementi in base a delle condizioni
+
+  // sets : lista non ordinata di elementi univoci
+  // non si puo' accedere agli elementi con l'index
+  // se si prova ad aggiungere un doppione viene ignorato e non viene aggiunto
+  var colorSet = {"pink", "blue"};
+  var stringSet = <String>{}; // senza la tipizzazione viene creato un map e non un set
+  Set newSet = {};
+
+  // maps : tipo gli oggetti in js
+  // si accede ai values tramite le keys
+  var newMap = {
+    "key": "value"
+  };
+
+  Map<String,int> typeMap= {
+    "String": 2
+  };
+  typeMap["String"] = 5; // modificare i valori nel map
+
+  Map<String,dynamic> dynamicMap = { // il value puo' essere di qualsiasi type
+    "String": 2,
+    "string2": "ciao"
+  };
+
+  // INPUT & OUTPUT
+  var name = stdin.readLineSync(); // appena disponibile prende cio' che e' stato scritto nel input
+  stdout.write("hello $name \n"); // stampa ciao + [nome scritto nell'input], \n per andare a capo
+
+  var statusInput = int.parse(stdin.readLineSync()!); // ! : assicuriamo il codice che questo dato non sara' null e lo trasformiamo in un numero
+  // negli enum ogni elemento ha un index partendo da 0, quindi per avere status === Status.OPEN , nell'input dovremmo scrivere 0
+  var enumValue = Status.values[statusInput]; // prendiamo il valore dell'enum che corrisponde a cio' che abbiamo scritto nell'input
+  switch(enumValue){
+    case Status.OPEN:{
+      print("WELCOMEEEE");
+      break;
+    }
+    case Status.CLOSED:{
+      print("Sorry we're closed");
+      break;
+    }
+  }
 
 }
