@@ -31,7 +31,7 @@ void main() {
   // sono growable a meno che non venga specificato il contrario
   List<int> numberList = [2,56,22,77];
   var fruitList = ["apple","orange"];
-  var fruitList2 = ["MELON", for(var fruit in fruitList) '${fruit.toUpperCase()}', "MANGO"]; // mette gli elementi di fruitList in uppercase
+  var fruitList2 = ["MELON", for(var fruit in fruitList) fruit.toUpperCase(), "MANGO"]; // mette gli elementi di fruitList in uppercase
   var isShoppingDone = true;
   var shoppingCart = ["apple", if(isShoppingDone) "grape"]; // aggiunge elementi in base a delle condizioni
 
@@ -74,6 +74,36 @@ void main() {
       print("Sorry we're closed");
       break;
     }
+  }
+
+  // fare qualcosa solo se un valore non e' null
+  String? nullString ; // puo' essere null perche' ha il ?
+  for (String? color in colorSet){ // String? : se l'elemento non e' null fai il print senno' non fare niente e basta
+    print(color?.toUpperCase());
+    print(color ?? "idk"); // equivalente di color ? color : "idk"
+  }
+
+  // LATE
+  late double pi; // late permette di creare variabili not null anche senza dargli subito un valore, l'importante e' che venga valorizzata prima di essere utilizzata
+  pi = 3.14;
+
+  // LAZY 
+  String getVar(){
+    return "ciao";
+  }
+  late String lazyVar = getVar(); // questa sintassi indica una variabile lazy
+  // con lazy la variabile viene inizializzata solo se viene effettivamente usata (se non viene usata getVar non partira' mai risparmiando risorse)
+
+  // parameters
+  void exampleFunction(param1, {required String param2, String? param3}){ // name parameters sono opzionali a meno che non ci sia il required
+    print(param1.toLowerCase());
+    print(param2.toLowerCase());
+    print(param3?.toLowerCase());
+  }
+  void exampleFunction2(param1, [String param2 = "ciao", String param3 = "come stai"]){ // con le [] sono position parameters ma opzionali e con un valore di default in caso non vengano passati 
+    print(param1.toLowerCase());
+    print(param2.toLowerCase());
+    print(param3?.toLowerCase());
   }
 
 }
