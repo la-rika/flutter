@@ -7,6 +7,20 @@ enum Status {
   CLOSED // 1
 }
 
+class Customer {
+  String  name = "Ciccio";
+  int age = 90;
+  String? city ;
+
+// permette di costruire l'oggetto direttamente quando viene inizializzto
+  Customer(String name, int age,{String? city}){
+    this.name = name;
+    this.age = age;
+    this.city = city;
+  }
+}
+
+
 void main() {
 
   var chupagna = "chupagna"; // puo' essere assegnato solo type string
@@ -106,4 +120,9 @@ void main() {
     print(param3?.toLowerCase());
   }
 
+// CLASSES & OBJECTS
+  Customer susan = Customer(); // classe definitva sopra il main
+  susan.name = "papaya";
+
+  Customer jimmy =  new Customer("jimmy",22,city:"milan"); // i name parameters si passano con nome: parameter
 }
